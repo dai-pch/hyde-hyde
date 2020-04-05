@@ -1,0 +1,21 @@
+{{ define "header" }}
+{{ partial "header.html" . }}
+{{ end }}
+
+{{ define "content" }}
+<div class="post-archive">
+    {{ range (where (where .Site.RegularPages "Type" "in" .Site.Params.MainSections) "Kind" "page").GroupByDate "2006" }}
+    <span class="section__title">{{ .Key }}</span>
+    <ul class="posts listing">
+        {{ with .Pages }}
+        {{ partial "posts-list.html" . }}
+        {{ end }}
+    </ul>
+    {{ end }}
+
+</div>
+{{ end }}
+
+{{ define "footer" }}
+{{ partial "page-list/footer.html" . }}
+{{ end }}
